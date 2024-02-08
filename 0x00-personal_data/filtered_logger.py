@@ -21,7 +21,7 @@ def filter_datum(
                     all fields in the log line (message).
         return: The log message obfuscated.
     '''
-    for part in message.split(separator):
-        if part.split("=")[0] in fields:
-            message = re.sub(part.split("=")[1], redaction, message)
+    for field in fields:
+        message = re.sub(f'{field}=.*?{separator}',
+                         f'{field}={redaction}{separator}', message)
     return message
