@@ -52,16 +52,20 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         get_db: function
         return: The mysql connector object.
     '''
-    db_username = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
-    db_password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
-    db_host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
-    db_name = os.getenv("PERSONAL_DATA_DB_NAME", "")
-    connection = mysql.connector.connect(host=db_host,
-                                         port=3306,
-                                         user=db_username,
-                                         password=db_password,
-                                         database=db_name)
-    return connection
+    try:
+        db_username = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
+        db_password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+        db_host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
+        db_name = os.getenv("PERSONAL_DATA_DB_NAME", "")
+        connection = mysql.connector.connect(
+                host=db_host,
+                user=db_username,
+                password=db_password,
+                database=db_name
+        )
+        return connection
+    except mysql.connector.Error as error:
+        return None
 
 
 class RedactingFormatter(logging.Formatter):
