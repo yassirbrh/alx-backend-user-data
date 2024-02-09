@@ -65,6 +65,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         )
         return connection
     except mysql.connector.Error as error:
+        print(error)
         return None
 
 
