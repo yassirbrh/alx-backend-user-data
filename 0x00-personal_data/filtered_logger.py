@@ -82,8 +82,8 @@ def main() -> None:
     logger = get_logger()
 
     for row in cursor:
-        str_row = ''.join(f'{f}={str(r)}; ' for r, f in zip(row, field_names))
-        logger.info(str_row.strip())
+        row_str = ''.join(f'{f}={str(r)}; ' for r, f in zip(row, field_names))
+        logger.info(row_str.strip())
 
     cursor.close()
     db_conn.close()
@@ -110,3 +110,7 @@ class RedactingFormatter(logging.Formatter):
         '''
         msg = super(RedactingFormatter, self).format(record)
         return filter_datum(self.fields, self.REDACTION, msg, self.SEPARATOR)
+
+
+if __name__ == '__main__':
+    main()
