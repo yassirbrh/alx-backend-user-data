@@ -28,6 +28,23 @@ def filter_datum(
     return message
 
 
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
+
+def get_logger() -> logging.Logger:
+    '''
+        get_logger: function
+        return: Logging.Logger object.
+    '''
+    new_logger = logging.getLogger("user_data")
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
+    new_logger.setLevel(logging.INFO)
+    new_logger.propagate = False
+    new_logger.addHandler(stream_handler)
+    return new_logger
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
