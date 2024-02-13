@@ -2,7 +2,7 @@
 '''
     Module to manage the Basic authentication
 '''
-from auth import Auth
+from . import Auth
 
 
 class BasicAuth(Auth):
