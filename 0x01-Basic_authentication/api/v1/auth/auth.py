@@ -33,7 +33,9 @@ class Auth:
             @request: the Flask request object.
             return: The Flask request object.
         '''
-        return request
+        if request is None:
+            return None
+        return request.get('Authorization')
 
     def current_user(self, request=None) -> TypeVar('User'):
         '''
