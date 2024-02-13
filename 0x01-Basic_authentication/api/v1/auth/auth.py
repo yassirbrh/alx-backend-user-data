@@ -16,7 +16,8 @@ class Auth:
             @self: class instance.
             @path: The path.
             @excluded_paths: the excluded paths.
-            return: True or False.
+            return: True if the path not excluded.
+                    False otherwise.
         '''
         if not path or not excluded_paths or len(excluded_paths) == 0:
             return True
