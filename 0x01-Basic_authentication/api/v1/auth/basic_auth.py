@@ -23,4 +23,4 @@ class BasicAuth(Auth):
             return None
         if not authorization_header.startswith("Basic "):
             return None
-        return re.search(r'Basic (.*)', authorization_header)
+        return re.search(r'Basic (.*)', authorization_header).group(1)
