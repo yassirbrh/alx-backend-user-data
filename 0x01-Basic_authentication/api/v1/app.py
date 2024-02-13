@@ -21,7 +21,7 @@ if getenv("AUTH_TYPE") == "auth":
 
 
 @app.before_request
-def before_request() -> None:
+def user_authentication() -> None:
     '''
         before_request: function
         description: handling the before request.
