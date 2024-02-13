@@ -44,4 +44,4 @@ class Auth:
             @request: The flask request object.
             return: the current user.
         '''
-        return request
+        return None
