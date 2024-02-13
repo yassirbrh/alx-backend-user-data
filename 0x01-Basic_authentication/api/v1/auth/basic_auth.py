@@ -3,6 +3,7 @@
     Module to manage the Basic authentication
 '''
 from .auth import Auth
+import base64
 import re
 
 
@@ -24,3 +25,20 @@ class BasicAuth(Auth):
         if not authorization_header.startswith("Basic "):
             return None
         return re.search(r'Basic (.*)', authorization_header).group(1)
+
+    def decode_base64_authorization_header(
+            self,
+            base64_authorization_header: str) -> str:
+        '''
+            decode_base64_authorization_header: function
+            @self: class instance.
+            @base64_authorization_header: Base64 encoded Authorization Header.
+            return: decoded Base64 header.
+        '''
+        if base64_authorization_header:
+            if type(base64_authorization_header) == str:
+                try:
+                    result = base64.b64decode(base64_authorization_header)
+                    return result.decode('utf-8')
+                except binascii.Error:
+                    return None
