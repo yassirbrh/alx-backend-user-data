@@ -5,6 +5,7 @@
 from .auth import Auth
 import base64
 import binascii
+from models.user import User
 import re
 
 
@@ -59,3 +60,22 @@ class BasicAuth(Auth):
                     user_data = decoded_base64_authorization_header.split(':')
                     return (user_data[0], user_data[1])
         return (None, None)
+
+    def user_object_from_credentials(
+            self,
+            user_email: str, user_pwd: str) -> TypeVar('User'):
+        '''
+            user_object_from_credentials: function
+            @self: class instance.
+            @user_email: user email.
+            @user_pwd: user password.
+            return: The User Instance that had user email equals to user_email
+        '''
+        if user_email is None or type(user_email) != str:
+            return None
+        if user_pwd is None or type(user_pwd) != str:
+            return None
+        user = User.search({'email': user_email})
+        if not user or user.is_valid_password(user_pwd):
+            return None
+        return user
