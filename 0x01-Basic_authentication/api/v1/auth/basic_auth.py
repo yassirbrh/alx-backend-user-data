@@ -91,4 +91,8 @@ class BasicAuth(Auth):
             @request: the flask object request.
             return: The User Instance.
         '''
-        pass
+        auth_header = self.authorization_header(request)
+        base64_header = self.extract_base64_authorization_header(auth_header)
+        decoded_data = self.decode_base64_authorization_header(base64_header)
+        email, password = self.extract_user_credentials(decoded_data)
+        return self.user_object_from_credentials(email, password)
