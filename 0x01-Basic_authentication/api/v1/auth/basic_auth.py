@@ -83,3 +83,12 @@ class BasicAuth(Auth):
         if len(user) == 0 or not user[0].is_valid_password(user_pwd):
             return None
         return user[0]
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        '''
+            current_user: function
+            @self: class instance.
+            @request: the flask object request.
+            return: The User Instance.
+        '''
+        pass
