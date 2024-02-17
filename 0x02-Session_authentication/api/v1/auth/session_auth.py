@@ -4,7 +4,7 @@
 '''
 from .auth import Auth
 import uuid
-from models import User
+from models.user import User
 
 
 class SessionAuth(Auth):
