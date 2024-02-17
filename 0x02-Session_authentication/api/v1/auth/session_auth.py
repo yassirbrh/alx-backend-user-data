@@ -10,7 +10,7 @@ class SessionAuth(Auth):
     '''
         Class SessionAuth handles the Session authentication.
     '''
-    user_id_by_session_id = {}
+    cls.user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
         '''
