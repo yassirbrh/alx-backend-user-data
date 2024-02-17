@@ -34,5 +34,5 @@ class SessionAuth(Auth):
         '''
         if session_id is None or type(session_id) != str:
             return None
-        user_id = self.user_id_by_session_id.get(session_id, None)
+        user_id = self.user_id_by_session_id.get(session_id)
         return user_id
