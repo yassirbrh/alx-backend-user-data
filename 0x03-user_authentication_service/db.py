@@ -2,8 +2,10 @@
 """DB module
 """
 from sqlalchemy import create_engine
+from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm.session import Session
 
 from user import Base, User
@@ -45,3 +47,17 @@ class DB:
             self._session.rollback()
             user = None
         return user
+
+    def find_user_by(self, **kwargs: dict) -> User:
+        '''
+            find_user_by: instance method.
+            @kwargs: list of keyworded arguments.
+            return: the User Object.
+        '''
+        for key, value in kwargs.items():
+            if hasattr(User, key):
+                raise InvalidRequestError()
+        res = self._session.query(User).filter(**kwargs).first()
+        if res is None:
+            raise NoResultFound()
+        return res
