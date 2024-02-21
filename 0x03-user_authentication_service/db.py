@@ -48,7 +48,7 @@ class DB:
             user = None
         return user
 
-    def find_user_by(self, **kwargs: dict) -> User:
+    def find_user_by(self, **kwargs) -> User:
         '''
             find_user_by: instance method.
             @kwargs: list of keyworded arguments.
