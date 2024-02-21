@@ -43,6 +43,6 @@ class DB:
             self._session.add(user)
             self._session.commit()
             return user
-        except TypeError:
+        except  Exception:
             self._session.rollback()
             return None
