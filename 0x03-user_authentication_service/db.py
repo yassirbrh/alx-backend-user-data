@@ -55,7 +55,7 @@ class DB:
             return: the User Object.
         '''
         for key, value in kwargs.items():
-            if hasattr(User, key):
+            if not hasattr(User, key):
                 raise InvalidRequestError()
         res = self._session.query(User).filter(**kwargs).first()
         if res is None:
