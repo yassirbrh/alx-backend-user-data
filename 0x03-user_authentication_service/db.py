@@ -62,7 +62,7 @@ class DB:
             raise NoResultFound()
         return res
 
-    def update_user(self, user_id, **kwargs) -> None:
+    def update_user(self, user_id: int, **kwargs) -> None:
         '''
             update_user: instance method.
             @user_id: User ID.
