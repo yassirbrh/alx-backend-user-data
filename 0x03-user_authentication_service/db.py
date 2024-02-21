@@ -38,11 +38,7 @@ class DB:
             @hashed_password: String representing the hashed password.
             return: the User Object created.
         '''
-        user = User(
-                email=email,
-                hashed_password=hashed_password,
-                session_id=self._session())
-        self._session().add(user)
-        self._session().commit()
-        self._session().close()
+        user = User(email=email, hashed_password=hashed_password)
+        self._session.add(user)
+        self._session.commit()
         return user
