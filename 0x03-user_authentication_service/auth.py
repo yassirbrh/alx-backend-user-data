@@ -32,6 +32,6 @@ class Auth:
         '''
         hashed = _hash_password(password)
         try:
-            return self._db.add_user(email, password)
+            return self._db.add_user(email, hashed)
         except ValueError:
             print("User {} already exists.".format(email))
