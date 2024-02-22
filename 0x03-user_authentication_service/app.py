@@ -44,8 +44,10 @@ def login() -> dict:
     password = request.form.get("password")
     if not AUTH.valid_login(email, password):
         abort(401)
-    AUTH.create_session(email)
-    return jsonify({"email": email, "message": "logged in"})
+    session_id = AUTH.create_session(email)
+    resp = jsonify({"email": email, "message": "logged in"})
+    resp.set_cookie("session_id", session_id)
+    return resp
 
 
 if __name__ == "__main__":
