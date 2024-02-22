@@ -97,15 +97,12 @@ def update_password() -> dict:
         update_password: function
         return: JSON Payload.
     '''
-    err_raise = False
     email = request.form.get("email")
     reset_token = request.form.get("reset_token")
     new_password = request.form.get("new_password")
     try:
-        token = AUTH.get_reset_password_token(email)
+        token = AUTH.update_password(reset_token, new_password)
     except ValueError:
-        err_raise = True
-    if reset_token != token or err_raise:
         abort(403)
     return jsonify({"email": email, "message": "Password updated"})
 
